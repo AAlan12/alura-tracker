@@ -1,10 +1,10 @@
 <template>
   <main class="columns is-gapless is-multiline">
     <div class="column is-one-quarter">
-      <BarraLateral/>
+      <BarraLateral />
     </div>
     <div class="column is-three-quarter">
-      <Formulario/>
+      <Formulario />
     </div>
   </main>
 </template>
@@ -16,8 +16,8 @@ import Formulario from './components/Formulario.vue';
 
 
 export default defineComponent({
-    name: "App",
-    components: { BarraLateral, Formulario }
+  name: "App",
+  components: { BarraLateral, Formulario }
 });
 </script>
 
