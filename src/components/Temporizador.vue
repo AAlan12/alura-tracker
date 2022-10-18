@@ -35,13 +35,13 @@ export default defineComponent({
         }
     },
     methods: {
-        iniciar() {
+        iniciar():void {
             this.cronometroRodando = true
             this.cronometro = setInterval(() => {
                 this.tempoEmSegundos += 1
             }, 1000)
         },
-        finalizar() {
+        finalizar():void {
             this.cronometroRodando = false
             clearInterval(this.cronometro)
             this.$emit('aoTemporizadorFinalizado', this.tempoEmSegundos)
@@ -50,3 +50,9 @@ export default defineComponent({
     }
 });
 </script>
+
+<style scoped>
+.button {
+  margin-left: 8px;
+}
+</style>

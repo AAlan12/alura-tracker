@@ -30,7 +30,14 @@ export default defineComponent({
             type: Object as PropType<ITarefa>,
             required: true
         }
+    },
+    computed: {
+    tempoGasto () : string {
+      return new Date(this.tarefa.duracaoEmSegundos * 1000)
+        .toISOString()
+        .substr(11, 8)
     }
+  }
 });
 </script>
 

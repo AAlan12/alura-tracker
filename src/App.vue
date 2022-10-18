@@ -25,7 +25,7 @@ export default defineComponent({
     }
   },
   methods: {
-    trocarTema(modoEscuroAtivo: boolean) {
+    trocarTema(modoEscuroAtivo: boolean):void {
       this.modoEscuroAtivo = modoEscuroAtivo
     }
   }

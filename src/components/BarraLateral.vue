@@ -8,7 +8,7 @@
             {{textoBotao}}
           </button>
         </div>
-        <nav>
+        <nav class="panel mt-5">
           <ul>
             <li>
               <router-link to="/" class="link">
@@ -56,12 +56,14 @@ export default defineComponent({
 </script>
 
 <style scoped>
+h1 {
+  text-align: center;
+}
 header {
-  padding: 1rem;
+  padding: 2rem;
   background: #0d3b66;
   width: 100%;
   height: 100vh;
-  text-align: center;
 }
 @media only screen and (max-width: 768px) {
   header {
