@@ -1,3 +1,7 @@
+<div align="center" >
+  <img src="https://github.com/AAlan12/alura-tracker/blob/main/src/assets/img/tracker-layout.PNG?raw=true"/>
+</div>
+
 # alura-tracker
 
 App de gerenciamento de tempo de atividades, desenvolvido durante os estudo de Vue
@@ -10,9 +14,13 @@ App de gerenciamento de tempo de atividades, desenvolvido durante os estudo de V
 | :fire: Desafio     | https://vercel.com/aalan12/alura-tracker
 
 <!-- Inserir imagem com a #vitrinedev ao final do link -->
-![](https://drive.google.com/file/d/16bVom3cwvIWbe0lCmc2ijdsks4kECXCO/view?usp=sharing#vitrinedev)
+![](https://github.com/AAlan12/alura-tracker/blob/main/src/assets/img/tracker-layout-dark.PNG?raw=true#vitrinedev)
 
 ## Detalhes do projeto
 
-Textos e imagens que descrevam seu projeto, suas conquistas, seus desafios, próximos passos, etc...
+### Tecnologias e ferramentas
+
+- HTML5
+- TypeScript
+- Vue 3
 
