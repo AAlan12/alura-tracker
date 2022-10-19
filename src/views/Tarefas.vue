@@ -30,7 +30,7 @@ export default defineComponent({
         }
     },
     methods: {
-        salvarTarefa(tarefa: ITarefa) {
+        salvarTarefa(tarefa: ITarefa): void {
             this.tarefas.push(tarefa)
         },
     }
