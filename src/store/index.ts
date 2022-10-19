@@ -1,36 +1,54 @@
+import { INotificacao } from "@/interfaces/INotificacao";
 import IProjeto from "@/interfaces/IProjeto";
 import { InjectionKey } from "vue";
 import { createStore, Store, useStore as vuexUseStore } from "vuex";
-import { ADD_PROJETO, EDIT_PROJETO, DELETE_PROJETO } from "./tipo-mutacoes";
+import {
+  ADD_PROJETO,
+  EDIT_PROJETO,
+  DELETE_PROJETO,
+  NOTIFICAR,
+} from "./tipo-mutacoes";
 
-interface Estado{
-    projetos: IProjeto[]
+interface Estado {
+  projetos: IProjeto[];
+  notificacoes: INotificacao[];
 }
 
-export const key: InjectionKey<Store<Estado>> = Symbol()
+export const key: InjectionKey<Store<Estado>> = Symbol();
 
 export const store = createStore<Estado>({
-    state: {
-        projetos:[]
+  state: {
+    projetos: [],
+    notificacoes: [],
+  },
+  mutations: {
+    [ADD_PROJETO](state, nomeDoProjeto: string) {
+      const projeto = {
+        id: new Date().toISOString(),
+        nome: nomeDoProjeto,
+      } as IProjeto;
+      state.projetos.push(projeto);
     },
-    mutations: {
-        [ADD_PROJETO](state, nomeDoProjeto: string){
-            const projeto = {
-                id: new Date().toISOString(),
-                nome: nomeDoProjeto
-            } as IProjeto
-            state.projetos.push(projeto)
-        },
-        [EDIT_PROJETO](state, projeto: IProjeto){
-            const index = state.projetos.findIndex(proj => proj.id == projeto.id)
-            state.projetos[index] = projeto
-        },
-        [DELETE_PROJETO](state, id: string) {
-            state.projetos = state.projetos.filter(proj => proj.id != id)
-        }
-    }
-})
+    [EDIT_PROJETO](state, projeto: IProjeto) {
+      const index = state.projetos.findIndex((proj) => proj.id == projeto.id);
+      state.projetos[index] = projeto;
+    },
+    [DELETE_PROJETO](state, id: string) {
+      state.projetos = state.projetos.filter((proj) => proj.id != id);
+    },
+    [NOTIFICAR](state, novaNotificacao: INotificacao) {
+      novaNotificacao.id = new Date().getTime();
+      state.notificacoes.push(novaNotificacao);
 
-export function useStore(): Store<Estado>{
-    return vuexUseStore(key)
+      setTimeout(() => {
+        state.notificacoes = state.notificacoes.filter(
+          (notificacao) => notificacao.id != novaNotificacao.id
+        );
+      }, 3000);
+    },
+  },
+});
+
+export function useStore(): Store<Estado> {
+  return vuexUseStore(key);
 }

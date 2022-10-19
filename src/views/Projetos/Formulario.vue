@@ -21,7 +21,8 @@
   import { useStore } from "@/store";
   import { defineComponent } from "vue";
   
-  import { EDIT_PROJETO, ADD_PROJETO } from '@/store/tipo-mutacoes'
+  import { EDIT_PROJETO, ADD_PROJETO, NOTIFICAR } from '@/store/tipo-mutacoes'
+  import { TipoNotificacao } from "@/interfaces/INotificacao";
   
   export default defineComponent({
     // eslint-disable-next-line vue/multi-word-component-names
@@ -53,6 +54,11 @@
           this.store.commit(ADD_PROJETO, this.nomeDoProjeto)
         }
         this.nomeDoProjeto = "";
+        this.store.commit(NOTIFICAR, {
+        titulo: 'Novo projeto foi salvo',
+        texto: 'Prontinho ;) seu projeto já está disponível.',
+        tipo: TipoNotificacao.SUCESSO
+      })
         this.$router.push('/projetos')
       },
     },
