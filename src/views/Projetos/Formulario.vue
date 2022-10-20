@@ -16,7 +16,8 @@
 import { useStore } from "@/store";
 import { defineComponent } from "vue";
 
-import { EDIT_PROJETO, ADD_PROJETO } from '@/store/tipo-mutacoes'
+
+import { ALTERAR_PROJETO, CADASTRAR_PROJETO } from "@/store/tipo-acoes";
 import { TipoNotificacao } from "@/interfaces/INotificacao";
 
 import useNotificador from '@/hooks/notificador'
@@ -31,7 +32,9 @@ export default defineComponent({
   },
   mounted() {
     if (this.id) {
-      const projeto = this.store.state.projetos.find(proj => proj.id == this.id)
+      const projeto = this.store.state.projetos.find(
+        proj => proj.id == this.id
+        );
       this.nomeDoProjeto = projeto?.nome || ''
     }
   },
@@ -43,15 +46,23 @@ export default defineComponent({
   methods: {
     salvar() {
       if (this.id) {
-        this.store.commit(EDIT_PROJETO, {
+        this.store.dispatch(ALTERAR_PROJETO, {
           id: this.id,
           nome: this.nomeDoProjeto
-        })
+        }).then(() => this.lidarComSucesso());
       } else {
-        this.store.commit(ADD_PROJETO, this.nomeDoProjeto)
+        this.store
+        .dispatch(CADASTRAR_PROJETO, this.nomeDoProjeto)
+        .then(() => this.lidarComSucesso());
       }
+    },
+    lidarComSucesso(){
       this.nomeDoProjeto = "";
-      this.notificar(TipoNotificacao.SUCESSO, 'Excelente!', 'O projeto foi cadastrado com sucesso!')
+      this.notificar(
+        TipoNotificacao.SUCESSO,
+        'Excelente!',
+        'O projeto foi cadastrado com sucesso!'
+        );
       this.$router.push('/projetos')
     },
   },
@@ -61,7 +72,7 @@ export default defineComponent({
     return {
       store,
       notificar,
-    }
-  }
+    };
+  },
 });
 </script>

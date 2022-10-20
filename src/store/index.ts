@@ -1,3 +1,9 @@
+import {
+  ALTERAR_PROJETO,
+  CADASTRAR_PROJETO,
+  OBTER_PROJETOS,
+  REMOVER_PROJETO,
+} from "./tipo-acoes";
 import { INotificacao } from "@/interfaces/INotificacao";
 import IProjeto from "@/interfaces/IProjeto";
 import { InjectionKey } from "vue";
@@ -7,7 +13,10 @@ import {
   EDIT_PROJETO,
   DELETE_PROJETO,
   NOTIFICAR,
+  DEFINE_PROJETOS,
 } from "./tipo-mutacoes";
+
+import http from "@/http";
 
 interface Estado {
   projetos: IProjeto[];
@@ -33,6 +42,9 @@ export const store = createStore<Estado>({
       const index = state.projetos.findIndex((proj) => proj.id == projeto.id);
       state.projetos[index] = projeto;
     },
+    [DEFINE_PROJETOS](state, projetos: IProjeto[]) {
+      state.projetos = projetos;
+    },
     [DELETE_PROJETO](state, id: string) {
       state.projetos = state.projetos.filter((proj) => proj.id != id);
     },
@@ -45,6 +57,26 @@ export const store = createStore<Estado>({
           (notificacao) => notificacao.id != novaNotificacao.id
         );
       }, 3000);
+    },
+  },
+  actions: {
+    [OBTER_PROJETOS]({ commit }) {
+      http
+        .get("projetos")
+        .then((response) => commit(DEFINE_PROJETOS, response.data));
+    },
+    [CADASTRAR_PROJETO](contexto, nomeDoProjeto: string) {
+      return http.post("/projetos", {
+        nome: nomeDoProjeto,
+      });
+    },
+    [ALTERAR_PROJETO](contexto, projeto: IProjeto) {
+      return http.put(`/projetos/${projeto.id}`, projeto);
+    },
+    [REMOVER_PROJETO]({ commit }, id: string) {
+      return http
+        .delete(`/projetos/${id}`)
+        .then(() => commit(DELETE_PROJETO, id));
     },
   },
 });
