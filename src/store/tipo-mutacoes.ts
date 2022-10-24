@@ -4,3 +4,7 @@ export const DELETE_PROJETO = 'DELETE_PROJETO'
 export const DEFINE_PROJETOS = 'DEFINE_PROJETOS'
 
 export const NOTIFICAR = 'NOTIFICAR'
+
+
+export const  DEFINE_TAREFAS = 'DEFINE_TAREFAS' 
+export const  ADD_TAREFA = 'ADD_TAREFA' 

@@ -1,7 +1,9 @@
 import {
   ALTERAR_PROJETO,
   CADASTRAR_PROJETO,
+  CADASTRAR_TAREFA,
   OBTER_PROJETOS,
+  OBTER_TAREFAS,
   REMOVER_PROJETO,
 } from "./tipo-acoes";
 import { INotificacao } from "@/interfaces/INotificacao";
@@ -14,12 +16,16 @@ import {
   DELETE_PROJETO,
   NOTIFICAR,
   DEFINE_PROJETOS,
+  DEFINE_TAREFAS,
+  ADD_TAREFA,
 } from "./tipo-mutacoes";
 
 import http from "@/http";
+import ITarefa from "@/interfaces/ITarefa";
 
 interface Estado {
   projetos: IProjeto[];
+  tarefas: ITarefa[];
   notificacoes: INotificacao[];
 }
 
@@ -27,6 +33,7 @@ export const key: InjectionKey<Store<Estado>> = Symbol();
 
 export const store = createStore<Estado>({
   state: {
+    tarefas: [],
     projetos: [],
     notificacoes: [],
   },
@@ -47,6 +54,12 @@ export const store = createStore<Estado>({
     },
     [DELETE_PROJETO](state, id: string) {
       state.projetos = state.projetos.filter((proj) => proj.id != id);
+    },
+    [DEFINE_TAREFAS](state, tarefas: ITarefa[]) {
+      state.tarefas = tarefas;
+    },
+    [ADD_TAREFA](state, tarefa: ITarefa){
+      state.tarefas.push(tarefa)
     },
     [NOTIFICAR](state, novaNotificacao: INotificacao) {
       novaNotificacao.id = new Date().getTime();
@@ -78,6 +91,15 @@ export const store = createStore<Estado>({
         .delete(`/projetos/${id}`)
         .then(() => commit(DELETE_PROJETO, id));
     },
+    [OBTER_TAREFAS]({ commit }) {
+      http
+        .get("tarefas")
+        .then((response) => commit(DEFINE_TAREFAS, response.data));
+    },
+    [CADASTRAR_TAREFA]({ commit }, tarefa: ITarefa){
+      return http.post('/tarefas', tarefa)
+      .then(response => commit(ADD_TAREFA, response.data))
+    }
   },
 });
 
