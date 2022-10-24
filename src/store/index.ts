@@ -1,5 +1,6 @@
 import {
   ALTERAR_PROJETO,
+  ALTERAR_TAREFA,
   CADASTRAR_PROJETO,
   CADASTRAR_TAREFA,
   OBTER_PROJETOS,
@@ -18,6 +19,7 @@ import {
   DEFINE_PROJETOS,
   DEFINE_TAREFAS,
   ADD_TAREFA,
+  EDIT_TAREFA,
 } from "./tipo-mutacoes";
 
 import http from "@/http";
@@ -61,6 +63,10 @@ export const store = createStore<Estado>({
     [ADD_TAREFA](state, tarefa: ITarefa){
       state.tarefas.push(tarefa)
     },
+    [EDIT_TAREFA](state, tarefa: ITarefa) {
+      const index = state.tarefas.findIndex(t => t.id == tarefa.id);
+      state.tarefas[index] = tarefa;
+    },
     [NOTIFICAR](state, novaNotificacao: INotificacao) {
       novaNotificacao.id = new Date().getTime();
       state.notificacoes.push(novaNotificacao);
@@ -99,7 +105,11 @@ export const store = createStore<Estado>({
     [CADASTRAR_TAREFA]({ commit }, tarefa: ITarefa){
       return http.post('/tarefas', tarefa)
       .then(response => commit(ADD_TAREFA, response.data))
-    }
+    },
+    [ALTERAR_TAREFA]({ commit }, tarefa: ITarefa) {
+      return http.put(`/tarefas/${tarefa.id}`, tarefa)
+              .then(() => commit(ALTERAR_TAREFA,tarefa))
+    },
   },
 });
 

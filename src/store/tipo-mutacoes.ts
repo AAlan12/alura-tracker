@@ -8,3 +8,4 @@ export const NOTIFICAR = 'NOTIFICAR'
 
 export const  DEFINE_TAREFAS = 'DEFINE_TAREFAS' 
 export const  ADD_TAREFA = 'ADD_TAREFA' 
+export const  EDIT_TAREFA = 'EDIT_TAREFA' 

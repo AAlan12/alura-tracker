@@ -21,7 +21,7 @@
     },
     {
       "duracaoEmSegundos": 3,
-      "descricao": "correção de bugs",
+      "descricao": "correção de bug",
       "projeto": {
         "id": 1,
         "nome": "Alura Tracker"
