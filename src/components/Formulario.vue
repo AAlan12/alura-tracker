@@ -24,8 +24,7 @@
 
 <script lang="ts">
 import { key } from '@/store';
-import { computed, ref } from '@vue/reactivity';
-import { defineComponent } from 'vue'
+import { defineComponent, computed, ref  } from 'vue'
 import { useStore } from 'vuex';
 import Temporizador from './Temporizador.vue'
 

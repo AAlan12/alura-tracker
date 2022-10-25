@@ -1,4 +1,4 @@
-import { Estado } from "./../../index";
+import { Estado } from "@/store";
 import IProjeto from "@/interfaces/IProjeto";
 import { Module } from "vuex";
 import { ADD_PROJETO, DEFINE_PROJETOS, DELETE_PROJETO, EDIT_PROJETO } from "@/store/tipo-mutacoes";
@@ -49,4 +49,9 @@ export const projeto: Module<EstadoProjeto, Estado> = {
         .then(() => commit(DELETE_PROJETO, id));
     },
   },
+  getters: {
+    projetos(state){
+      return state.projetos
+    }
+  }
 };
