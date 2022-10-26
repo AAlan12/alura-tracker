@@ -1,5 +1,5 @@
 <div align="center" >
-  <img src="https://github.com/AAlan12/alura-tracker/blob/main/src/assets/img/tracker-layout.PNG?raw=true"/>
+  <img src="https://github.com/AAlan12/alura-tracker/blob/main/src/assets/img/tumb1.PNG?raw=true"/>
 </div>
 
 # alura-tracker
@@ -14,7 +14,7 @@ App de gerenciamento de tempo de atividades, desenvolvido durante os estudo de V
 | :fire: Desafio     | https://vercel.com/aalan12/alura-tracker
 
 <!-- Inserir imagem com a #vitrinedev ao final do link -->
-![](https://github.com/AAlan12/alura-tracker/blob/main/src/assets/img/tracker-layout-dark.PNG?raw=true#vitrinedev)
+![](https://github.com/AAlan12/alura-tracker/blob/main/src/assets/img/tumb2.PNG?raw=true#vitrinedev)
 
 ## Detalhes do projeto
 
